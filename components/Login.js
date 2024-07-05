@@ -17,21 +17,24 @@ export default function Login({ navigation }) {
 
   const onSubmit = (data) => {
     setUser(data)
-    getUserByUsername(user.username)
-    .then((result) => {
-      console.log(result)
-      Alert.alert('You are logged in', 'Test', [
-        {
-          text: 'Go to Home',
-          onPress: () => navigation.navigate('HomePage'),
-          style: 'default',
-        },
-      ]);   
-    })
-    .catch((error) => {
-      console.log(error, "Login Failed");
-    });
+    handleGetUser()
   };
+  const handleGetUser = () => {
+    getUserByUsername(user.username)
+
+  .then((result) => {
+    console.log(result)
+    Alert.alert(`You are logged in as ${user.username}!`, 'Click below to go to Home', [
+      {
+        text: 'Home',
+        onPress: () => navigation.navigate('HomePage'),
+        style: 'default',
+      },
+    ]);   
+  })
+  .catch((error) => {
+    console.log(error, "Login Failed");
+  })}
   
  
   
